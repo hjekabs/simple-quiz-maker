@@ -1,11 +1,15 @@
-import '@babel/polyfill'
-import 'mutationobserver-shim'
-import Vue from 'vue'
-import './plugins/bootstrap-vue'
-import App from './App.vue'
+import "@babel/polyfill";
+import "mutationobserver-shim";
+import Vue from "vue";
+import "./plugins/bootstrap-vue";
+import App from "./App.vue";
+import store from "./store/index.js";
+import router from "./router/index.js";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => h(App),
+  store: store,
+  router,
+}).$mount("#app");
