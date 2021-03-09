@@ -9,7 +9,11 @@ const vuexLocal = new VuexPersistence({
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
+    surveyCreated: false,
     question: "tests",
+  },
+  getters: {
+    hasSurvey: (state) => state.surveyCreated,
   },
   mutations: {},
   actions: {},
