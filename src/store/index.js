@@ -47,14 +47,16 @@ export default new Vuex.Store({
       localStorage.setItem("survey", JSON.stringify(survey));
     },
     SET_ANSWERS(state, answers) {
-      state.answers.push(answers);
       state.answersCreated = true;
       localStorage.setItem("answersCreated", true);
       let answersArr = [];
       answersArr.push(answers);
       const answersFromStorage = JSON.parse(localStorage.getItem("answers"));
-      if (answersFromStorage) answersArr.push(answersFromStorage);
+      if (answersFromStorage) {
+        answersFromStorage.map((answ) => answersArr.push(answ));
+      }
       localStorage.setItem("answers", JSON.stringify(answersArr));
+      state.answers = answersArr;
     },
   },
   actions: {
