@@ -6,7 +6,7 @@
         <h6>{{ answer.label }}</h6>
         <span v-if="answer.type !== 'selection'">{{ answer.value }}</span>
         <span v-else>
-          <span v-if="!answer.multiselect">{{ answer.multiValue[0] }}</span>
+          <span v-if="!answer.multiselect">{{ answer.multiValue }}</span>
           <span
             v-else
             v-for="answerValue in answer.multiValue"

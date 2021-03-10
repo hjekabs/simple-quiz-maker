@@ -50,12 +50,15 @@ export default new Vuex.Store({
       state.answersCreated = true;
       localStorage.setItem("answersCreated", true);
       let answersArr = [];
+      // push to newly created answers arr current asnwer
       answersArr.push(answers);
       const answersFromStorage = JSON.parse(localStorage.getItem("answers"));
       if (answersFromStorage) {
+        // push to newly created answers arr localstorage data
         answersFromStorage.map((answ) => answersArr.push(answ));
       }
       localStorage.setItem("answers", JSON.stringify(answersArr));
+      //   set state with current answer and from localStorage
       state.answers = answersArr;
     },
   },
