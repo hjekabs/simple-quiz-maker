@@ -6,10 +6,10 @@ const localStorage = window.localStorage;
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
-    surveyCreated: false,
-    survey: [],
-    answersCreated: false,
-    answers: [],
+    surveyCreated: localStorage.getItem("surveyCreated") || false,
+    survey: JSON.parse(localStorage.getItem("survey")) || [],
+    answersCreated: localStorage.getItem("answersCreated") || false,
+    answers: JSON.parse(localStorage.getItem("answers")) || [],
   },
   getters: {
     hasSurvey: (state) => {

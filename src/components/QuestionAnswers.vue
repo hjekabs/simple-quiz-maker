@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div v-for="(oneAnswer, i) in getAnswers" :key="oneAnswer.id" class="mb-5">
-      <h4>Answers for nr. {{ i + 1 }}</h4>
+    <div v-for="oneAnswer in getAnswers" :key="oneAnswer.id" class="mb-5">
       <div v-for="answer in oneAnswer" :key="answer.id">
         <h6>{{ answer.label }}</h6>
         <span v-if="answer.type !== 'selection'">{{ answer.value }}</span>
