@@ -10,12 +10,21 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     surveyCreated: false,
-    question: "tests",
+    survey: [],
   },
   getters: {
     hasSurvey: (state) => state.surveyCreated,
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    SET_SURVEY(state, survey) {
+      state.survey = survey;
+      state.surveyCreated = true;
+    },
+  },
+  actions: {
+    saveSurvey({ commit }, surveyData) {
+      commit("SET_SURVEY", surveyData);
+    },
+  },
   pluins: [vuexLocal.plugin],
 });

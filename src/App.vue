@@ -28,13 +28,11 @@
         </li>
       </ul>
     </nav>
-    <div v-if="!hasSurvey" class="component mt-5 text-center">
-      <h1>Add your first survey</h1>
-      <router-link class="btn btn-primary btn-lg mt-2" to="/create"
-        >Add a survey</router-link
-      >
+    <div class="container justify-content-center mt-5">
+      <div class="row justify-content-center">
+        <div class="col"><router-view></router-view></div>
+      </div>
     </div>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -47,9 +45,6 @@ export default {
     ...mapGetters({
       hasSurvey: "hasSurvey",
     }),
-  },
-  mounted() {
-    console.log(this.$store.state.question);
   },
 };
 </script>

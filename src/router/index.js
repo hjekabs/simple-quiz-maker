@@ -4,13 +4,12 @@ import Create from "../pages/Create.vue";
 import Edit from "../pages/Edit.vue";
 import FillSurvey from "../pages/FillSurvey.vue";
 import Answers from "../pages/Answers.vue";
-// import store from "../store/index.js";
-
-// const hasSurvey = store.getters["hasSurvey"];
+import Home from "../pages/Home.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", component: Home },
   { path: "/create", component: Create },
   { path: "/edit", component: Edit },
   { path: "/fill", component: FillSurvey },
@@ -18,12 +17,5 @@ const routes = [
 ];
 
 const router = new VueRouter({ mode: "history", routes });
-
-// router.beforeEach((to, from, next) => {
-//   if (!hasSurvey) {
-//     next({ path: "/" });
-//     return;
-//   } else next();
-// });
 
 export default router;
