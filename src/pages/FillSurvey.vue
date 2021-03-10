@@ -1,7 +1,20 @@
-<template><div></div></template>
+<template>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Complete survey</h5>
+      <QuestionFill />
+    </div>
+  </div>
+</template>
 
 <script>
-export default {};
+import QuestionFill from "../components/QuestionFill";
+
+export default {
+  components: {
+    QuestionFill,
+  },
+};
 </script>
 
 <style></style>
