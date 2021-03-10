@@ -3,14 +3,14 @@
     <form @submit="saveSurvey">
       <div
         class="questions-wrapper"
-        v-for="(question, index) in questionCount"
+        v-for="(question, index) in numberOfQuestions"
         :key="question.id"
       >
         <h6>Question number {{ index + 1 }}</h6>
         <div class="form-group">
           <input
             type="text"
-            v-model="form.questions[index].label"
+            v-model="questions[index].label"
             placeholder="Question label"
             class="form-control"
           />
@@ -19,17 +19,17 @@
             name="questionType"
             id="questionType"
             class="form-control"
-            v-model="form.questions[index].type"
+            v-model="questions[index].type"
           >
             <option v-for="type in questionTypes" :key="type.id">{{
               type
             }}</option>
           </select>
-          <div v-if="form.questions[index].type === 'selection'" class="mt-2">
+          <div v-if="questions[index].type === 'selection'" class="mt-2">
             <div class="form-check">
               <input
                 type="radio"
-                v-model="form.questions[index].multiSelect"
+                v-model="questions[index].multiSelect"
                 :value="true"
                 class="form-check-input"
               />
@@ -39,8 +39,8 @@
         </div>
         <div
           v-if="
-            form.questions[index].type === 'radio' ||
-              form.questions[index].type === 'selection'
+            questions[index].type === 'radio' ||
+              questions[index].type === 'selection'
           "
           class="form-group"
         >
@@ -48,8 +48,8 @@
           <input
             type="text"
             class="form-control mt-1"
-            v-for="(option, optionIndex) in form.questions[index].optionsCount"
-            v-model="form.questions[index].options[optionIndex]"
+            v-for="(option, optionIndex) in questions[index].optionsCount"
+            v-model="questions[index].options[optionIndex]"
             :key="option.id"
           />
           <button
@@ -62,13 +62,13 @@
         </div>
         <hr />
       </div>
-      <button class="btn btn-secondary" type="button" @click="addQuestion">
+      <span class="btn btn-secondary" @click="addQuestion">
         + Add question
-      </button>
+      </span>
       <button
         class="btn btn-primary btn-block mt-2"
         type="submit"
-        v-if="questionCount > 0"
+        v-if="numberOfQuestions > 0"
       >
         Save survey
       </button>
@@ -78,13 +78,23 @@
 
 <script>
 export default {
+  props: {
+    editMode: {
+      type: Boolean,
+    },
+    questions: {
+      type: Array,
+      default: () => [],
+    },
+    questionCount: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
-      questionCount: 0,
       questionTypes: ["text", "radio", "selection"],
-      form: {
-        questions: [],
-      },
+      numberOfQuestions: 0,
     };
   },
   methods: {
@@ -98,16 +108,22 @@ export default {
         multiSelect: false,
       };
       // add question object to data
-      this.form.questions.push(obj);
-      this.questionCount += 1;
+      this.questions.push(obj);
+      this.numberOfQuestions += 1;
     },
     addQuestionOptions(index) {
-      this.form.questions[index].optionsCount += 1;
+      this.questions[index].optionsCount += 1;
     },
     saveSurvey(e) {
-      this.$store.dispatch("saveSurvey", this.form.questions);
+      this.$store.dispatch("saveSurvey", this.questions);
+      this.$router.push("/");
       e.preventDefault();
     },
+  },
+  created() {
+    if (this.questionCount !== 0) {
+      this.numberOfQuestions = this.questionCount;
+    }
   },
 };
 </script>

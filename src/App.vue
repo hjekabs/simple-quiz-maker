@@ -46,6 +46,11 @@ export default {
       hasSurvey: "hasSurvey",
     }),
   },
+  watch: {
+    hasSurvey() {
+      console.log(this.hasSurvey);
+    },
+  },
 };
 </script>
 

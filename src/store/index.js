@@ -1,10 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import VuexPersistence from "vuex-persist";
 
-const vuexLocal = new VuexPersistence({
-  storage: window.localStorage,
-});
+const localStorage = window.localStorage;
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -13,12 +10,18 @@ export default new Vuex.Store({
     survey: [],
   },
   getters: {
-    hasSurvey: (state) => state.surveyCreated,
+    hasSurvey: (state) => {
+      if (localStorage.getItem("surveyCreated")) return true;
+      return state.surveyCreated;
+    },
+    getSurvey: () => JSON.parse(localStorage.getItem("survey")),
   },
   mutations: {
     SET_SURVEY(state, survey) {
       state.survey = survey;
       state.surveyCreated = true;
+      localStorage.setItem("surveyCreated", true);
+      localStorage.setItem("survey", JSON.stringify(survey));
     },
   },
   actions: {
@@ -26,5 +29,4 @@ export default new Vuex.Store({
       commit("SET_SURVEY", surveyData);
     },
   },
-  pluins: [vuexLocal.plugin],
 });

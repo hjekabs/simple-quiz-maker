@@ -5,10 +5,10 @@
       >Add a survey</router-link
     >
   </div>
-  <div v-else>
+  <div class="component text-center" v-else>
     <h1>Check out answers</h1>
     <router-link class="btn btn-primary btn-lg mt-2" to="/answers"
-      >Add a survey</router-link
+      >See answers</router-link
     >
   </div>
 </template>
@@ -21,9 +21,6 @@ export default {
     ...mapGetters({
       hasSurvey: "hasSurvey",
     }),
-  },
-  mounted() {
-    console.log(this.hasSurvey);
   },
 };
 </script>
